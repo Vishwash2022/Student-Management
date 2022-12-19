@@ -7,7 +7,7 @@ urlpatterns = [
     path('courses',views.courses),
     path('sign_up_data',views.sign_up_data),
     path('sign_in_data',views.sign_in_data),
-    path('dash',views.dash),
+    path('dash',views.dash,name="dash"),
     path('viewstudents',views.viewstudents),
     path('courses',views.courses),
     path('add_courses',views.add_courses),
