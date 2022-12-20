@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,14 +13,15 @@
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
-  <link href="/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="{% static "/css/nucleo-icons.css" %}" rel="stylesheet" />
+  <link href="{% static  "/css/nucleo-svg.css"%}" rel="stylesheet" />
   <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <script src="{% static "https://kit.fontawesome.com/42d5adcbca.js" %}" crossorigin="anonymous"></script>
   <!-- Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link href="{% static "https://fonts.googleapis.com/icon?family=Material+Icons+Round" %}" rel="stylesheet">
   <!-- CSS Files -->
-  <link id="pagestyle" href="/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+  <link id="pagestyle" href="{% static "/css/material-dashboard.css?v=3.0.0" %}" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'css/material-dashboard.css' %}">
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -35,7 +37,7 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white" href="/dashboard.html">
+          <a class="nav-link text-white" href="">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -55,7 +57,7 @@
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>
             </div>
-            <span class="nav-link-text ms-1">Employees</span>
+            <span class="nav-link-text ms-1">Teachers</span>
           </a>
         </li>
 		<li class="nav-item">
@@ -149,7 +151,7 @@
                 <i class="material-icons opacity-10">weekend</i>
               </div>
               <div class="text-end pt-1">
-               <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Courses</a>
+               <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="material-icons text-sm"></i>&nbsp;&nbsp; Add New Teacher</a>
               </div>
             </div>
             
@@ -164,7 +166,7 @@
             <div class="card-header pb-0">
               <div class="row">
                 <div class="col-lg-6 col-7">
-                  <h6>Total Courses</h6>
+                  <h6>Total Teacher</h6>
                 </div>
                
               </div>
@@ -174,10 +176,14 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Courses Name</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Payment</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Courses</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Completion</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Teacher Name</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Teacher Email</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Teacher Mobile Number</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Teacher Joining Date</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Teacher Education</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Teacher Teacher Id</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Teacher Work Experience </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Teacher Package </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -188,23 +194,34 @@
                             <img src="/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Satkar Girls PG 1</h6>
-							
+                            <h6 class="mb-0 text-sm">{{t.Teacher_name}}</h6>
                           </div>
                         </div>
                       </td>
 					  <td class="align-middle text-sm">
-                        <span class="text-xs font-weight-bold"> Rs.5000 </span>
+                        <span class="text-xs font-weight-bold">{{t.Teacher_email}}</span>
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold"> Satkar 1 </span>
+                        <span class="text-xs font-weight-bold">{{t.Teacher_mobile_number}}</span>
                       </td>
                       <td class="text-center text-sm">
-                       <span class="text-xs font-weight-bold"> 22 DEC 7:20 PM </span>
+                       <span class="text-xs font-weight-bold">{{t.Teacher_joining_date}}</span>
                       </td>
+                      <td class="text-center text-sm">
+                        <span class="text-xs font-weight-bold">{{t.Teacher_education}}</span>
+                       </td>
+                       <td class="text-center text-sm">
+                        <span class="text-xs font-weight-bold">{{t.Teacher_employee_id}}</span>
+                       </td>
+                       <td class="text-center text-sm">
+                        <span class="text-xs font-weight-bold">{{t.Teacher_work_exp}}</span>
+                       </td>
+                       <td class="text-center text-sm">
+                        <span class="text-xs font-weight-bold">{{t.teacher_pack}}</span>
+                       </td>
                     </tr>
 					
-					<tr>
+					{% comment %} <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
@@ -292,7 +309,7 @@
                        <span class="text-xs font-weight-bold"> 22 DEC 7:20 PM </span>
                       </td>
                     </tr>
-                   
+                    {% endcomment %}
                   </tbody>
                 </table>
               </div>
@@ -384,11 +401,11 @@
     </div>
   </div>
   <!--   Core JS Files   -->
-  <script src="/js/core/popper.min.js"></script>
-  <script src="/js/core/bootstrap.min.js"></script>
-  <script src="/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="/js/plugins/chartjs.min.js"></script>
+  <script src="{% static "/js/core/popper.min.js" %}"></script>
+  <script src="{% static "/js/core/bootstrap.min.js" %}"></script>
+  <script src="{% static "/js/plugins/perfect-scrollbar.min.js" %}"></script>
+  <script src="{% static "/js/plugins/smooth-scrollbar.min.js" %}"></script>
+  <script src="{% static "/js/plugins/chartjs.min.js" %}"></script>
   <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
@@ -640,15 +657,15 @@
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
       var options = {
-        damping: '0.5'
+        damping: '0.5'6
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
   <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <script async defer src="{% static "https://buttons.github.io/buttons.js" %}"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="/js/material-dashboard.min.js?v=3.0.0"></script>
+  <script src="{% static "/js/material-dashboard.min.js?v=3.0.0" %}"></script>
 </body>
 
 </html>
