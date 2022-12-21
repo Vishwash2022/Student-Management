@@ -30,15 +30,14 @@ class Student(models.Model):
         return self.Student_name
     
 class Teacher(models.Model):
-    Teacher_name=models.CharField(max_length=200)
-    Teacher_email=models.CharField(max_length=200)
-    Teacher_mobile_number=models.IntegerField(max_length=10)
-    Teacher_joining_date=models.DateField()
-    Teacher_education=models.CharField(max_length=100)
-    Teacher_employee_id=models.IntegerField(max_length=10)
-    Teacher_work_exp=models.CharField(max_length=200)
-    teacher_pack=models.CharField(max_length=100)
+    name=models.CharField(max_length=200)
+    email=models.EmailField()
+    mobile=models.CharField(max_length=10)
+    joining=models.DateField()
+    education=models.CharField(max_length=100)
+    employeeId=models.IntegerField()
+    workExp=models.CharField(max_length=100)
+    pack=models.CharField(max_length=100)
     is_active=models.BooleanField(default=True)
-    
     def __str__(self) -> str:
-        return self.Teacher_name
+        return self.name

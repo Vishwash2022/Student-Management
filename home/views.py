@@ -80,7 +80,7 @@ def updatecourse(request):
     c.id=request.POST['id'] 
     c.name=request.POST['name']
     fees=request.POST['fees']
-    c.fees=int(fees)
+    c.fees=request.POST['fees']
     c.duration=request.POST['duration']
     c.textfield=request.POST['textfield']   
     c.save()
@@ -140,49 +140,69 @@ def dashboard(request):
     data=Courses.objects.all()
     count_course= Courses.objects.all().count()
     count_student= Student.objects.all().count()
-    return render (request,'dashboard.html',{'data':data,'count_course':count_course,'count_student':count_student})
+    count_teacher=Teacher.objects.all().count()
+    return render (request,'dashboard.html',{'data':data,'count_course':count_course,'count_student':count_student,'count_teacher':count_teacher})
 
 def viewstudents(request):
     data=Courses.objects.all()
     st=Student.objects.all()
     return render(request,'viewstudents.html',{'data':data,'st':st})
 
-def Teacher(request):
-    # tc=Teacher.objects.all()
-    return render(request, 'teacher.html')            
+def Teachers(request):
+    tc=Teacher.objects.all()
+    return render(request, 'teacher.html',{'tc':tc})            
 
 def addteacher(request):
         if request.method == "POST":
-            Teacher_name= request.POST.get("tname")
-            Teacher_email= request.POST.get("temail")
-            Teacher_mobile_number= request.POST.get("tmobile")
-            Teacher_joining_date= request.POST.get("tjoindate")
-            Teacher_education= request.POST.get("teducation")
-            Teacher_employee_id= request.POST.get("tempid")
-            Teacher_work_exp= request.POST.get("tworkexpe")
-            teacher_pack=request.POST.get("tpack")
-            if Teacher.objects.filter(Teacher_email=Teacher_email).exists():
+            name= request.POST["tname"]
+            email= request.POST["temail"]
+            mobile= request.POST["tmobile"]
+            joining= request.POST["tjoindate"]
+            education= request.POST["teducation"]
+            employeeId= request.POST["tempid"]
+            workExp= request.POST["tworkexpe"]
+            pack=request.POST["tpack"]
+            if Teacher.objects.filter(email=email).exists():
                 messages.error(request, "Email id already exists")
-                return redirect('addteacher')
+                return redirect('teacher.html')
         
-            elif Teacher.objects.filter(Teacher_mobile_number=Teacher_mobile_number).exists():
+            elif Teacher.objects.filter(mobile=mobile).exists():
                 messages.error(request, "Mobile Number already exists")
-                return redirect('addteacher')
+                return redirect('teacher.html')
             else:
-                Teacher.objects.create( Teacher_name=Teacher_name, 
-                                            Teacher_email=Teacher_email, 
-                                            Teacher_mobile_number=Teacher_mobile_number,
-                                            Teacher_joining_date=Teacher_joining_date,
-                                            Teacher_education=Teacher_education,
-                                            Teacher_employee_id=Teacher_employee_id,
-                                            Teacher_work_exp=Teacher_work_exp,
-                                            teacher_pack=teacher_pack
+                Teacher.objects.create( name=name, 
+                                            email=email, 
+                                            mobile=mobile,
+                                            joining=joining,
+                                            education=education,
+                                            employeeId=employeeId,
+                                            workExp=workExp,
+                                            pack=pack
                                             )
                 messages.success(request, "Teacher Added Successfully!!")
-                # tc=Teacher.objects.all()
-                return render(request, 'teacher.html', {'tc':tc,
-                                                                 })
+                tc=Teacher.objects.all()
+                return render(request, 'teacher.html',{'tc':tc})
+            
         else:
-            stu=Teacher.objects.all()
-            return render(request, 'teacher.html', {'tc':tc})
+            tc=Teacher.objects.all()
+            return render(request, 'teacher.html',{'tc':tc})
 
+def updateteacher(request,pk):
+            t=Teacher()
+            t.id=pk
+            t.name= request.POST["name"]
+            t.email= request.POST["email"]
+            t.mobile= request.POST["mobile"]
+            t.joining= request.POST["joining"]
+            t.education= request.POST["education"]
+            t.employeeId= request.POST["employeeId"]
+            t.workExp= request.POST["workExp"]
+            t.pack=request.POST["pack"]
+            t.save()
+            tc=Teacher.objects.all()
+            return render(request, 'teacher.html',{'tc':tc})
+def deleteteacher(request,pk):
+    id=pk
+    Teacher.objects.filter(id=id).delete()
+    tc=Teacher.objects.all()
+    return render(request,'teacher.html',{'tc':tc})

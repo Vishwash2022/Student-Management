@@ -53,7 +53,7 @@
                   <p class="mb-0">Enter your email and password to register</p>
                 </div>
                 <div class="card-body">
-              <form action='signup' method='post'>
+              <form action='{% url "signin" %}' method='post'>
               {% csrf_token %}
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label"></label>
