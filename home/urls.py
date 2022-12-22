@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path,include
-from .import views
+from . import views
 urlpatterns = [
     path("",views.index),
     path("signin/",views.signin,name="signin"),
@@ -11,17 +11,19 @@ urlpatterns = [
     path("course/",views.course,name="course"),
     path("addcourses/",views.addcourses,name="addcourse"),
     path('deletecourse/',views.deletecourse,name="deletecourse"),
-    path('updatecourse/',views.updatecourse,name="updatecourse"),
     path('searchcourse/',views.searchcourse,name="searchcourse"),
     path('addstudent/',views.addstudent,name="addstudent"),
     path('deletestudent/',views.deletestudent,name="deletestudent"),
-    path('updatestudent/',views.updatestudent,name="updatestudent"),
     path('searchstudent/',views.searchstudent,name="searchstudent"),
     path('Teacher/',views.Teachers,name="Teacher"),
     path('addteacher/',views.addteacher,name="addTeacher"),
+    path('deleteteacher/<int:pk>',views.deleteteacher,name="deleteteacher"),
+    path('update/<int:pk>',views.update,name="update"),
+    path('updatestudent/<int:pk>',views.updatestudent,name="updatestudent"),
+    path('updatecourse/<int:pk>',views.updatecourse,name="updatecourse"),
+    path('updatecoursedata/<int:pk>',views.updatecoursedata,name="updatecoursedata"),
     path('updateteacher/<int:pk>',views.updateteacher,name="updateteacher"),
-    path('deleteteacher/<int:pk>',views.deleteteacher,name="deleteteacher")
-    
+    path('updateteacherdata/<int:pk>',views.updateteacherdata,name="updateteacherdata")
     
     
 ]

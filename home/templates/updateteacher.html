@@ -1,30 +1,191 @@
+{% load static  %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="stylesheet" href="{% static 'css/material-dashboard.css' %}">
+  <title>
+    Satkar Courses
+  </title>
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <!-- Nucleo Icons -->
+  <link href="{% static 'css/nucleo-icons.css'%}" rel="stylesheet" />
+  <link href="{% static 'css/nucleo-svg.css'%}" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="{% static 'css/material-dashboard.css' %}" rel="stylesheet" />
 </head>
-<body>
-    <div class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Modal body text goes here.</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Save changes</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+<body class="bg-gray-200">
+  <div class="container position-sticky z-index-sticky top-0">
+    <div class="row">
+      <div class="col-12">
+        <!-- Navbar -->
+
+        <!-- End Navbar -->
+      </div>
+    </div>
+  </div>
+  <main class="main-content  mt-0">
+    <div class="page-header align-items-start min-vh-100" style="background-image: url('https://www.powerslide.io/hubfs/illustrations%20articles/Impact%20management%20strat%C3%A9gique/Impact%20management%20strat%C3%A9gique.png');">
+      <span class="mask bg-gradient-dark opacity-6"></span>
+      <div class="container my-auto">
+        <div class="row">
+          <div class="col-lg-4 col-md-8 col-12 mx-auto">
+            <div class="card z-index-0 fadeIn3 fadeInBottom">
+              <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+                  <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Update Student</h4>
+                  <div class="row mt-3">
+                    <div class="col-2 text-center ms-auto">
+                      <a class="btn btn-link px-3" href="javascript:;">
+                        
+                      </a>
+                    </div>
+                    <div class="col-2 text-center px-1">
+                      <a class="btn btn-link px-3" href="javascript:;">
+                        
+                      </a>
+                    </div>
+                    <div class="col-2 text-center me-auto">
+                      <a class="btn btn-link px-3" href="javascript:;">
+
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <form  method='POST' name="myform" action="{% url 'updateteacherdata' tc.id %}">
+                {% csrf_token %}
+				  
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                      <div class="input-group input-group-outline mb-3">
+                        <label class="form-label"></label>
+                        <input type="text" class="form-control" name='name' placeholder='enter name' onfocus="focused(this)" onfocusout="defocused(this)" value="{{tc.name}}">
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                      <div class="input-group input-group-outline mb-3">
+                        <label class="form-label"></label>
+                        <input type="email" class="form-control" name='email' placeholder='enter email' onfocus="focused(this)" onfocusout="defocused(this)" value="{{tc.email}}">
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                      <div class="input-group input-group-outline mb-3">
+                        <label class="form-label"></label>
+                        <input type="text" class="form-control" name='mobile' placeholder='enter mobile mobile' onfocus="focused(this)" onfocusout="defocused(this)" value="{{tc.mobile}}">
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6">
+                      <div class="input-group input-group-outline mb-3">
+                        <label class="form-label"></label>
+                        <input type="text" class="form-control" name='joining' placeholder='enter your joining' onfocus="focused(this)" onfocusout="defocused(this)" value="{{tc.joining}}">
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6">
+                      <div class="input-group input-group-outline mb-3">
+                        <label class="form-label"></label>
+                        <input type="text" class="form-control" name='education' placeholder='enter your education' onfocus="focused(this)" onfocusout="defocused(this)" value="{{tc.education}}">
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6">
+                      <div class="input-group input-group-outline mb-3">
+                        <label class="form-label"></label>
+                        <input type="text" class="form-control"  name='employeeId' placeholder='enter your employee id' onfocus="focused(this)" onfocusout="defocused(this)" value="{{tc.empId}}">
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6">
+                      <div class="input-group input-group-outline mb-3">
+                        <label class="form-label"></label>
+                        <input type="text" class="form-control"  name='workExp' onchange="calc()" placeholder='enter your work exp' onfocus="focused(this)" onfocusout="defocused(this)" value="{{tc.workExp}}">
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="input-group input-group-outline mb-3">
+                          <label class="form-label"></label>
+                          <input type="text" class="form-control"  name='pack' onchange="calc()" placeholder='enter your Package' onfocus="focused(this)" onfocusout="defocused(this)" value="{{tc.pack}}">
+                        </div>
+                      </div>
+
+                    
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-2 mb-0"
+                        data-bs-dismiss="modal">Update</button>
+                    </div>
+                  </div>
+              </form>
+                  <p class="mt-4 text-sm text-center">
+                    You Want to nothing any Update?
+                    <a href="{% url 'Teacher' %}" class="text-primary text-gradient font-weight-bold">GO Back</a>
+                  </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      
+    </div>
+    <script>
+  {%if messages%}
+      {%for message in messages%}
+          window.alert('{{message}}')
+      {%endfor%}
+  {%endif%}    
+</script>
+<script>
+    function calc(){ 
+      if(isNaN(document.forms["myform"]["Total"].value) || document.forms["myform"]["Total"].value==""){ 
+      var text1 = 0; 
+      }else{ 
+      var text1 = parseInt(document.forms["myform"]["Total"].value); 
+      } 
+      if(isNaN(document.forms["myform"]["Paid"].value) || document.forms["myform"]["Paid"].value==""){ 
+      var text2 = 0; 
+      }else{ 
+      var text2 = parseInt(document.forms["myform"]["Paid"].value); 
+      } 
+      var n=text1-text2
+      document.forms["myform"]["Due"].value=n; 
+      }
+</script>
+  </main>
+  <!--   Core JS Files   -->
+  <script src="js/core/popper.min.js"></script>
+  <script src="js/core/bootstrap.min.js"></script>
+  <script src="js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="js/plugins/smooth-scrollbar.min.js"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="{% static 'js/material-dashboard.min.js' %}></script>
+<!-- messages -->
+
+
+
 </body>
+
 </html>

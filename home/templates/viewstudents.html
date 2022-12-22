@@ -234,30 +234,23 @@ crossorigin="anonymous"></script>
                   <tbody>
                    {% for s in st %}
                   <tr>
-                    <form action="{% url 'updatestudent' %}" method='post'>
-                    {% csrf_token %}
                     <input type="hidden" name="id" value='{{s.id}}'>
-                      <td><input class="bg-secondary text-white" type="text" name="name" value='{{s.Student_Name}}'></td>
-                      <td><input class="bg-secondary text-white" type="email" name="email" value='{{s.Student_email}}'></td>
-                      <td><input class="bg-secondary text-white" type="number" name="contact"value='{{s.Student_mobile_number}}'></td>
-                      <td><input class="bg-secondary text-white" type="text" name="college" value='{{s.Student_college}}'></td>
-                      <td><input class="bg-secondary text-white" type="text" name="degree" value='{{s.Student_degree}}'></td>
-                     <td> <select name="course" class="bg-secondary text-white" >
-                        {% comment %} <option value="{{s.course.id}}">{{s.course.name}}</option> {% endcomment %}
-                        {% for k in data%}
-                        <option value="{{k.id}}">{{k.Course_name}}</option>
-                        {% endfor%}
-                      </select></td>
+                      <td>{{s.Student_Name}}</td>
+                      <td>{{s.Student_email}}</td>
+                      <td>{{s.Student_mobile_number}}</td>
+                      <td>{{s.Student_college}}</td>
+                      <td>{{s.Student_degree}}</td>
+                      <td><option value="{{k.id}}">{{s.Course_name.Course_name}}</option></td>
                       <td>{{s.Student_paid}}</td>
                       <td>{{s.Student_due}}</td>
                       <td>{{s.Student_total}}</td>
+                     <td>
                       
+                        <div class="text-end pt-1">
+                          <a class="btn bg-gradient-dark mb-0" href="{% url 'update' s.id %}"  ><i class="material-icons text-sm">add</i>Update Students</a>
+                        </div> 
                       
-                    {% comment %} <div class="text-end pt-1">
-                <a class="btn bg-gradient-dark mb-0" href="javascript:;" data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"><i class="material-icons text-sm">add</i>Add Students</a>
-              </div> {% endcomment %}
-                  </form>
+                     </td>
                     <td><a href="/deletestudent?id={{s.id}}"><span><svg xmlns="http://www.w3.org/2000/svg" width="16"
                                     height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                     <path
@@ -419,6 +412,10 @@ crossorigin="anonymous"></script>
           </div>
         </div>
       </div>
+
+      <!-- update model-->
+
+      
 
       <footer class="footer py-4  ">
         <div class="container-fluid">

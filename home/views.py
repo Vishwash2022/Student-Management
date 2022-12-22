@@ -12,15 +12,15 @@ def signup(request):
         email=request.POST['email']
         pwd=make_password(request.POST['pwd'])
         if User.objects.filter(Email=email).exists():
-            messages.info(request,'Email already exists ')
+            messages.info(request,'Email already exists') 
             return render(request,'sign-up.html')    
         else:
             user=User.objects.create(Name=name,Email=email,Password=pwd)
             user.save()
-            messages.success(request,'!!!!! Sucessfully Registered !!!!!')
+            messages.success(request,'Sucessfully Registered')
             return render(request,'index.html')
     else:        
-        return render(request,"sign-up.html")
+        return render(request,"sign-up.html") 
 
 def signin(request):
     if request.method=='POST':
@@ -30,12 +30,13 @@ def signin(request):
             obj=User.objects.get(Email=email)
             pwd=obj.Password
             if check_password(pwd_user,pwd):
+                messages.success(request,'Sucessfully Login')
                 return redirect('/dashboard')
             else:
-                messages.error(request,' Password Incorrect')
+                messages.error(request,'Password Incorrect')
                 return render (request,'index.html')                
         else:
-            messages.error(request,' email is not registered')       
+            messages.error(request,'Email is not Registered')       
             return render(request,"index.html") 
     else:       
         return render(request,"index.html")
@@ -71,21 +72,11 @@ def addcourses(request):
 
 def deletecourse(request):
     cid=request.GET['cid']
-    Courses.objects.get(id=cid).delete()
+    Courses.objects.filter(id=cid).delete()
     data=Courses.objects.all()
-    return render(request,"courses.html",{'data':data}) 
+    return render(request,'courses.html',{'data':data}) 
 
-def updatecourse(request):
-    c=Courses()
-    c.id=request.POST['id'] 
-    c.name=request.POST['name']
-    fees=request.POST['fees']
-    c.fees=request.POST['fees']
-    c.duration=request.POST['duration']
-    c.textfield=request.POST['textfield']   
-    c.save()
-    data=Courses.objects.all()
-    return render(request,'course.html',{'data':data})
+
 
 def searchcourse(request):
     name=request.POST['name']
@@ -116,20 +107,7 @@ def deletestudent(request):
     st=Student.objects.all()
     return render(request,'viewstudents.html',{'data':data,'st':st}) 
 
-def updatestudent(request): 
-    t=Student()
-    t.id=request.POST['id']
-    t.name=request.POST['name']
-    t.email=request.POST['email']
-    t.contact=request.POST['contact']
-    t.college=request.POST['college']
-    t.degree=request.POST['degree']
-    tid=request.POST['course']
-    t.course=Courses.objects.get(id=tid)
-    t.save()
-    data=Courses.objects.all()
-    st=Student.objects.all()
-    return render(request,'viewstudents.html',{'data':data,'st':st})
+
 
 def searchstudent(request):
     find=request.POST['name']
@@ -187,7 +165,66 @@ def addteacher(request):
             tc=Teacher.objects.all()
             return render(request, 'teacher.html',{'tc':tc})
 
+
+def deleteteacher(request,pk):
+    id=pk
+    Teacher.objects.filter(id=id).delete()
+    tc=Teacher.objects.all()
+    return render(request,'teacher.html',{'tc':tc})
+def update(request,pk):
+    id=pk
+    stu=Student.objects.get(id=id)
+    data=Courses.objects.all()
+    return render(request,'updatestudent.html', context={
+        'student':stu,
+        'data':data
+    })
+def updatestudent(request,pk):
+    if request.method=='POST':
+        student_object=Student()
+        student_object.id=pk
+        student_object.Student_Name=request.POST['name']
+        student_object.Student_email=request.POST['email']
+        student_object.Student_mobile_number=request.POST['mobile']
+        student_object.Student_degree=request.POST['degree']
+        student_object.Student_college=request.POST['college']
+        id=request.POST['course']
+        student_object.Course_name=Courses.objects.get(id=id)
+        student_object.Student_due=request.POST['Due']
+        student_object.Student_paid=request.POST['Paid']
+        student_object.Student_total=request.POST['Total']
+        student_object.save()
+        st=Student.objects.all()
+        return render (request,'viewstudents.html',{'st':st})
+    else:
+        messages.error(request,'nothing update')
+
+def updatecourse(request,pk):
+    id=pk
+    data=Courses.objects.get(id=id)
+    return render(request,'updatecourse.html', context={
+        'data':data
+    })
+def updatecoursedata(request,pk):
+    if request.method=='POST':
+        course_object=Courses()
+        course_object.id=pk
+        course_object.Course_name=request.POST['name']
+        course_object.Course_fees=request.POST['fees']
+        course_object.Course_duration=request.POST['duration']
+        course_object.Course_textbox=request.POST['desc']
+        course_object.save()
+        data=Courses.objects.all()
+        return render (request,'courses.html',{'data':data})
+    
 def updateteacher(request,pk):
+    id=pk
+    tc=Teacher.objects.get(id=id)
+    return render(request,'updateteacher.html', context={
+        'tc':tc
+    })
+    
+def updateteacherdata(request,pk):
             t=Teacher()
             t.id=pk
             t.name= request.POST["name"]
@@ -201,8 +238,3 @@ def updateteacher(request,pk):
             t.save()
             tc=Teacher.objects.all()
             return render(request, 'teacher.html',{'tc':tc})
-def deleteteacher(request,pk):
-    id=pk
-    Teacher.objects.filter(id=id).delete()
-    tc=Teacher.objects.all()
-    return render(request,'teacher.html',{'tc':tc})
