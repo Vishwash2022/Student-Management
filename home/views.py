@@ -107,12 +107,10 @@ def deletestudent(request):
     st=Student.objects.all()
     return render(request,'viewstudents.html',{'data':data,'st':st}) 
 
-
-
 def searchstudent(request):
     find=request.POST['name']
     s=Student.objects.filter(Q(name=find) | Q(email=find) | Q(college=find)).all()
-    return render(request,'viewstudents.html',{'st':s})                                   
+    return render(request,'viewstudents.html',{'st':s})
 
 def dashboard(request):
     data=Courses.objects.all()
