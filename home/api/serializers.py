@@ -24,7 +24,7 @@ class TeacherSerializer(serializers.ModelSerializer):
         model = Teacher
         fields = "__all__"
         
-        
+        #add new work hear 
         
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
