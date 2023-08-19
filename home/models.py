@@ -18,7 +18,7 @@ class Courses(models.Model):
 class Student(models.Model):
     Student_Name=models.CharField(max_length=200)
     Student_email=models.EmailField(max_length=200)
-    Student_mobile_number=models.IntegerField(max_length=10)
+    Student_mobile_number=models.IntegerField()
     Student_college=models.CharField(max_length=200)
     Student_degree=models.CharField(max_length=200)
     Course_name=models.ForeignKey(Courses,on_delete=models.CASCADE)
